@@ -51,7 +51,7 @@ If requirements are unclear, ask focused questions before proposing a solution.
 
 ### 3) Implementation (only what was requested)
 
-- Apply the relevant language reference requirements (`references/python.md`, `references/typescript.md`) when applicable.
+- Apply the relevant language reference requirements (`references/python.md`, `references/typescript.md`, `references/go.md`) when applicable.
 - Apply the smallest correct diff; avoid unrelated refactors.
 - Keep responsibilities separated (data access vs business logic vs presentation).
 - Prefer defensive interfaces for public boundaries (validate inputs; fail clearly).

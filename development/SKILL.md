@@ -33,6 +33,8 @@ When writing or modifying code in these languages, read and follow the correspon
 
 - **Python**: `references/python.md`
 - **TypeScript / React / Tailwind / shadcn**: `references/typescript.md`
+- **Go**: `references/go.md`
+- **Rust**: `references/rust.md`
 
 If the change spans multiple languages, load and apply each relevant reference.
 

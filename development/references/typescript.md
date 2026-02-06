@@ -94,3 +94,85 @@ Use this reference when writing, reviewing, or debugging TypeScript/React in the
 - **README:** Keep the `README.md` file up to date.
 - **Setup Instructions:** Include clear setup instructions in the documentation.
 - **API Endpoints:** Document all API endpoints.
+
+For each exported symbol, write/upgrade a TypeDoc-compatible TSDoc comment:
+- short Summary (index-friendly)
+- @remarks for caveats/guarantees
+- @param/@returns/@throws/@typeParam as applicable
+- at least one fenced @example for primary entrypoints
+- use {@link} to related exports
+
+Examples:
+
+Function template example:
+```ts
+/**
+ * Create a stable cache key for an input value.
+ *
+ * @remarks
+ * Deterministic across property order. Intended for small inputs; performance is linear in
+ * the size of the serialized representation.
+ *
+ * @param value - JSON-serializable input. Circular references are rejected.
+ * @returns URL-safe cache key string.
+ *
+ * @throws {@link CacheKeyError} If `value` contains circular references.
+ *
+ * @example
+ * ```ts
+ * const key = cacheKey({ b: 2, a: 1 });
+ * // Same key as { a: 1, b: 2 }
+ * ```
+ */
+export function cacheKey(value: unknown): string;
+```
+
+Class template example:
+```ts
+/**
+ * Client for interacting with the Foo service.
+ *
+ * @remarks
+ * - Instances are safe for concurrent requests.
+ * - Call {@link FooClient.close} to release sockets when finished.
+ *
+ * @example
+ * ```ts
+ * const client = new FooClient({ apiKey: process.env.FOO_KEY! });
+ * const item = await client.getItem("123");
+ * await client.close();
+ * ```
+ */
+export class FooClient {
+  /** ... */
+}
+```
+
+Options object template example:
+```ts
+export interface RetryOptions {
+  /**
+   * Maximum retry attempts (not counting the initial attempt).
+   *
+   * @defaultValue `3`
+   */
+  maxRetries?: number;
+
+  /**
+   * Backoff strategy. If omitted, uses exponential backoff with jitter.
+   */
+  backoff?: "exponential" | "fixed";
+}
+```
+
+Module/file overview example:
+```ts
+/**
+ * Foo SDK public entrypoint.
+ *
+ * @remarks
+ * Most consumers should import from this module instead of deep paths.
+ *
+ * @packageDocumentation
+ */
+```
